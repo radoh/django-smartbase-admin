@@ -167,6 +167,7 @@ class SBAdminDateWidget(SBAdminBaseWidget, forms.DateInput):
     def __init__(self, form_field=None, attrs=None):
         super().__init__(
             form_field,
+            format="%Y-%m-%d",
             attrs={
                 "class": "input js-datepicker",
                 "data-sbadmin-datepicker": self.get_data(),
@@ -178,8 +179,7 @@ class SBAdminDateWidget(SBAdminBaseWidget, forms.DateInput):
         return json.dumps(
             {
                 "flatpickrOptions": {
-                    # same format as django uses in format_value just without %
-                    "dateFormat": get_format(self.format_key)[0].replace("%", ""),
+                    "dateFormat": "Y-m-d",
                     "altInput": True,
                     "altFormat": get_format(
                         "SHORT_DATE_FORMAT", use_l10n=settings.USE_L10N
